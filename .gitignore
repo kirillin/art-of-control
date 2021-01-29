@@ -3,5 +3,6 @@
 slprj
 *_rtw
 *build
-.original
-.mexa*
+*.original
+*.mexa*
+.vscode
