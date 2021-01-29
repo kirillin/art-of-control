@@ -3,3 +3,5 @@
 slprj
 *_rtw
 *build
+.original
+.mexa*
