@@ -1,8 +1,12 @@
 *~
 *.slxc
+*.slx.*
 slprj
 *_rtw
 *build
 *.original
 *.mexa*
 .vscode
+*.fig
+*.png
+*.eps

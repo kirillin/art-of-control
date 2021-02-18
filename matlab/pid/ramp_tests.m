@@ -1,8 +1,21 @@
 
 [x, v , a, j, t] = aramp_d(1, 0.001, 0, 0, 0, 4);
-[x2, v2, a2, t2] = vramp_d(1, 0.001, x(end), v(end), a(end));
+[x2, v2, a2, j2, t2] = aramp_d(1, 0.001, x(end), v(end), a(end), 0);
 [x3, v3, a3, j3, t3] = aramp_d(1, 0.001, x2(end), v2(end), a2(end), -4);
 
+[x, v , a, j, t] = aramp_d(1, 0.001, 0, 0, 0, 1.5);
+[x2, v2, a2, j2, t2] = aramp_d(1, 0.001, x(end), v(end), a(end), 0);
+[x3, v3, a3, j3, t3] = aramp_d(1, 0.001, x2(end), v2(end), a2(end), -1.5);
+
+
+% [x, v , a, j, t] = aramp_d(1, 0.001, 0, 0, 2, 0);
+% [x2, v2, a2, j2, t2] = aramp_d(1, 0.001, x(end), v(end), 0, 0);
+% [x3, v3, a3, j3, t3] = aramp_d(1, 0.001, x2(end), v2(end), -2, 0);
+
+
+xx = [x, x2, x3];
+aa = [a, a2, a3];
+tt = [t, t2+t(end), t3 + t(end) + t2(end)];
 
 subplot(3,1,1);
 hold on
@@ -109,6 +122,7 @@ function [x, v, a, j, t] = aramp_d(ta, dt, x0, v0, a0, j_max)
         v(i) = vk;
         a(i) = ak;
         j(i) = jk;
+
     end
 end
 
