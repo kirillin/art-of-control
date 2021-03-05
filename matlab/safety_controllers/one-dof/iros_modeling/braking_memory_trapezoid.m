@@ -7,12 +7,9 @@ classdef braking_memory_trapezoid < matlab.System
         T_R
         x0_
         v0_
-        
-%         x_V0
-        
+
         k0
         b0
-        
     end
 
     properties(DiscreteState)
@@ -31,6 +28,9 @@ classdef braking_memory_trapezoid < matlab.System
         a0
         
         t0
+        
+        k_prev
+        b_prev
     end
 
     % Pre-computed constants
@@ -113,7 +113,7 @@ classdef braking_memory_trapezoid < matlab.System
             t_b = h1 + h2 + h3;
         end                
         
-        function [d_b0, d_b_j0, t_b0, h10, h20, h30, x0, v0, a0, t0] = stepImpl(obj, trig, t, x, dx, ddx, x_V0)
+        function [d_b0, d_b_j0, t_b0, h10, h20, h30, x0, v0, a0, t0, k0, b0] = stepImpl(obj, trig, t, x, dx, ddx, x_V0, k_prev, b_prev)
             obj.x_V0 = x_V0;
             
             if (obj.prev_trig == 0 && trig == 1)
@@ -134,6 +134,9 @@ classdef braking_memory_trapezoid < matlab.System
                 obj.v0 = dx;
                 obj.a0 = ddx;
                 obj.t0 = t;
+                
+                obj.k_prev = k_prev;
+                obj.b_prev = b_prev;
             end
             
             if trig == 0
@@ -153,6 +156,9 @@ classdef braking_memory_trapezoid < matlab.System
             a0 = obj.a0;
             
             t0 = obj.t0;
+            
+            k0 = obj.k_prev;
+            b0 = obj.b_prev;
 
         end
 
@@ -170,6 +176,10 @@ classdef braking_memory_trapezoid < matlab.System
             obj.t0 = 0;
             
             obj.prev_trig = 0;
+
+            obj.k_prev = 0;
+            obj.b_prev = 0;
+            
         end
     end
 end

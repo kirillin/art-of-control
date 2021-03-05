@@ -39,10 +39,7 @@ classdef FSM < matlab.System
 
         function [k_, b_, k_prev, b_prev, stage] = stepImpl(obj, k1, b1, k2, b2, k3, b3, t, d, F_I)
             % `s_i = [ki, bi]` is parameters of imedance controller 
-            
-            k_ = 0;
-            b_ = 0;
-            
+                
             if t > obj.t_init                   % time for initislization
                 if d > obj.d_delta              % stage 1
                     obj.current_state = 1;
@@ -71,9 +68,6 @@ classdef FSM < matlab.System
             stage = obj.current_state;
             k_ = obj.k;
             b_ = obj.b;
-            
-            k_prev = obj.k_prev;
-            b_prev = obj.b_prev;
         end
 
         function resetImpl(obj)
